@@ -71,10 +71,10 @@ public class FilesDownloadTest {
         ClassLoader classLoader = this.getClass().getClassLoader();
         try (InputStream is = classLoader.getResourceAsStream("csv.csv");
              Reader reader = new InputStreamReader(is)) {
-            CSVReader csvReader = new CSVReader(reader);
+             CSVReader csvReader = new CSVReader(reader);
 
-            List<String[]> strings = csvReader.readAll();
-            assertEquals(5001, strings.size());
+             List<String[]> strings = csvReader.readAll();
+             assertEquals(5001, strings.size());
         }
     }
 
@@ -82,11 +82,12 @@ public class FilesDownloadTest {
     @DisplayName("Парсинг ZIP файлов")
     void parseZipFileTest() throws IOException, CsvException {
         ClassLoader classLoader = this.getClass().getClassLoader();
-        try (InputStream is = classLoader.getResourceAsStream("zip.zip");
+        try (InputStream is = classLoader.getResourceAsStream("sample-zip-file.zip");
              ZipInputStream zis = new ZipInputStream(is)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 System.out.println(entry.getName());
+                assertEquals("sample.txt", entry.getName());
             }
         }
     }
